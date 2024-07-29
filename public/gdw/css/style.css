@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700italic,700');
 @font-face {
     font-family: 'vinque';
     src: url(fonts/vinque.otf) format('otf');
@@ -140,6 +141,10 @@ header p {
   font-size: 0.9em;
   font-style: italic;
   margin-top: 0;
+}
+
+p, blockquote {
+  font-family: Alegreya, serif;
 }
 
 table {
