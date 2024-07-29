@@ -290,7 +290,7 @@ figure.portrait img {
 #document ul {
   padding: 2em 0 2em 2em;
   list-style: disc;
-  list-style-type: "✥  ";
+  list-style-type: "\2767  ";
 }
 
 #document ul li,
