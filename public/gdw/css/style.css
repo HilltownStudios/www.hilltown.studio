@@ -271,6 +271,11 @@ figure.portrait {
   clear: both;
 }
 
+figure.portrait-left {
+  float: left;
+  clear: both;
+}
+
 figure.portrait img {
   width: 100%;
   max-width: 170px;
