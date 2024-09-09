@@ -1,22 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700italic,700');
-@font-face {
-    font-family: 'vinque';
-    src: url(fonts/vinque.otf) format('otf');
-    src: url(fonts/vinque.ttf) format('truetype');
-    src: url(fonts/vinque.eot);
-    src: url(fonts/vinque.eot?#iefix) format('embedded-opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
+@import url('https://fonts.cdnfonts.com/css/vinque');
+                
 
 html {
   scroll-behavior: smooth;
-  --index-font-family: "vinque rg", serif;
+  --index-font-family: "Vinque", serif;
 }
 
 body {
   font-size: 18pt;
-  font-family: "vinque rg", sans-serif;
+  font-family: "Vinque", sans-serif;
   background-color: black;
   color: #dfdfdf;
   margin: 0;
