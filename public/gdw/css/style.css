@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700italic,700');
 @import url('https://fonts.cdnfonts.com/css/vinque');
-                
+
 
 html {
   scroll-behavior: smooth;
@@ -71,14 +71,14 @@ vellum-doc .roller .table-result {
   padding-top: 2em;
 }
 
-#document > section {
+#document>section {
   padding-left: 6em;
   padding-right: 6em;
   max-width: 1000px;
 }
 
 @media (max-width: 1000px) {
-  #document > section {
+  #document>section {
     padding-left: 1em;
     padding-right: 1em;
     max-width: 1000px;
@@ -136,7 +136,8 @@ header p {
   margin-top: 0;
 }
 
-p, blockquote {
+p,
+blockquote {
   font-family: Alegreya, serif;
 }
 
@@ -151,7 +152,7 @@ table caption {
 }
 
 tbody {
-  border-top : 2px solid;
+  border-top: 2px solid;
 }
 
 td,
@@ -283,6 +284,12 @@ figure.portrait img {
     display: block;
     margin: auto;
   }
+}
+
+figure figcaption {
+  font-family: Alegreya, serif;
+  font-style: italic;
+  font-size: 0.6em;
 }
 
 #document ul {
