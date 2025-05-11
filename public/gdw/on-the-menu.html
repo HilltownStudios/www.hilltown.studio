@@ -4,61 +4,68 @@
         <title>
             Dolmenwood: What's on the Menu?
         </title>
+        <script type="module" src="https://www.unpkg.com/vellum-doc@0.10.0/vellum-doc.js">
+        </script>
+        <link rel="stylesheet" href="css/style.css">
         <script lang="javascript">
-            const poorMain = [
-                "Battered pizzle",
-                "Blood porridge",
-                "Bubble and squeak",
-                "Dregger's pie",
-                "Fisher's gruel",
-                "Roast wellington",
-                "Special pasty",
-                "Woad in the hole"
-            ]
-            const poorSide = [
-                "Codswallop",
-                "Pig's ear",
-                "Sourcroute",
-                "Wormskin"
-            ]
-            const commonMain = [
-                "Mutton roast",
-                "Onion sandwich",
-                "Pook's pudding",
-                "Puggle pie",
-                "Sausage and mash",
-                "Shanky",
-                "Snail skewers",
-                "Trottel mash"
-            ]
-            const commonSide = [
-                "Pickled eggs",
-                "Coldlanks",
-                "Hameth sprats",
-                "Ruddy chad"
-            ]
-            const fancyMain = [
-                "Blackbird pie",
-                "Brathering",
-                "Jellied lamprey",
-                "Longmere pike",
-                "Maids-o'-the-lake",
-                "Roast lurkey",
-                "Unicorn rump",
-                "Whole suckling pig"
-            ]
-            const fancySide = [
-                "Larks' tongues in aspic",
-                "Old Shuck",
-                "Sparrey",
-                "Vinegared troll moss"
-            ]
-            const fancyDessert = [
-                "Fondant pastries",
-                "Sugared plums",
-                "Trifle",
-                "Walnut tarts"
-            ]
+            function dishLists() {
+                return {
+                    poorMain: [
+                        "Battered pizzle",
+                        "Blood porridge",
+                        "Bubble and squeak",
+                        "Dregger's pie",
+                        "Fisher's gruel",
+                        "Roast wellington",
+                        "Special pasty",
+                        "Woad in the hole"
+                    ],
+                    poorSide: [
+                        "Codswallop",
+                        "Pig's ear",
+                        "Sourcroute",
+                        "Wormskin"
+                    ],
+                    commonMain: [
+                        "Mutton roast",
+                        "Onion sandwich",
+                        "Pook's pudding",
+                        "Puggle pie",
+                        "Sausage and mash",
+                        "Shanky",
+                        "Snail skewers",
+                        "Trottel mash"
+                    ],
+                    commonSide: [
+                        "Pickled eggs",
+                        "Coldlanks",
+                        "Hameth sprats",
+                        "Ruddy chad"
+                    ],
+                    fancyMain: [
+                        "Blackbird pie",
+                        "Brathering",
+                        "Jellied lamprey",
+                        "Longmere pike",
+                        "Maids-o'-the-lake",
+                        "Roast lurkey",
+                        "Unicorn rump",
+                        "Whole suckling pig"
+                    ],
+                    fancySide: [
+                        "Larks' tongues in aspic",
+                        "Old Shuck",
+                        "Sparrey",
+                        "Vinegared troll moss"
+                    ],
+                    fancyDessert: [
+                        "Fondant pastries",
+                        "Sugared plums",
+                        "Trifle",
+                        "Walnut tarts"
+                    ]
+                }
+            }
 
             function randomIntFromInterval(min, max) { // min and max included 
                 return Math.floor(Math.random() * (max - min + 1) + min);
@@ -75,113 +82,89 @@
                 connectedCallback() {
                     const quality = this.getAttribute("quality") // poor, common, fancy
                     const type = this.getAttribute("type") // main, side, dessert
+                    const accessor = quality + String(type).charAt(0).toUpperCase() + String(type).slice(1)
+                    const dishList = dishLists()[accessor]
+                    const maxDishes = dishList.length / 2   // as long as the dish lists are all even!
+                    const minDishes = maxDishes - 1
 
-                    const shadow = this.attachShadow({mode: "open"})
-                    const wrapper = document.createElement("div")
-
-                    const numberMains = randomIntFromInterval(3,4)
-                    const numberSides = randomIntFromInterval(1,2)
-                    const numberDesserts = randomIntFromInterval(1,2)   // only for fancy quality
-                    var mains = []
-                    var sides = []
-                    var desserts = []
-
-                    if (quality == "poor") {
-                        if (type == "main") {
-                            while (mains.length < numberMains) {
-                                const thisMain = poorMain[Math.floor(Math.random()*8)]
-                                if (!mains.includes(thisMain)) {
-                                    mains.push(thisMain)
-                                }
-                            }
-                            wrapper.innerHTML = mains.join("<br>")
-                        } else {
-                            while (sides.length < numberSides) {
-                                const thisSide = poorSide[Math.floor(Math.random()*4)]
-                                if (!sides.includes(thisSide)) {
-                                    sides.push(thisSide)
-                                }
-                            }
-                            wrapper.innerHTML = sides.join("<br>")
+                    const shadowRoot = this.attachShadow({mode: "open"})
+                    const style = document.createElement("style")
+                    style.textContent = `
+                        li.menu-item {
+                            font-family: "Alegreya", serif;
                         }
-                    } else if (quality == "common") {
-                        if (type == "main") {
-                            while (mains.length < numberMains) {
-                                const thisMain = commonMain[Math.floor(Math.random()*8)]
-                                if (!mains.includes(thisMain)) {
-                                    mains.push(thisMain)
-                                }
-                            }
-                            wrapper.innerHTML = mains.join("<br>")
-                        } else {
-                            while (sides.length < numberSides) {
-                                const thisSide = commonSide[Math.floor(Math.random()*4)]
-                                if (!sides.includes(thisSide)) {
-                                    sides.push(thisSide)
-                                }
-                            }
-                            wrapper.innerHTML = sides.join("<br>")
+                            ul.menu {
+                            padding: 2em 0 2em 2em;
+                            list-style: disc;
+                            list-style-type: "\\2767  ";
                         }
-                    } else if (quality == "fancy") {
-                        if (type == "main") {
-                            while (mains.length < numberMains) {
-                                const thisMain = poorMain[Math.floor(Math.random()*8)]
-                                if (!mains.includes(thisMain)) {
-                                    mains.push(thisMain)
-                                }
-                            }
-                            wrapper.innerHTML = mains.join("<br>")
-                        } else if (type == "side") {
-                            while (sides.length < numberSides) {
-                                const thisSide = poorSide[Math.floor(Math.random()*4)]
-                                if (!sides.includes(thisSide)) {
-                                    sides.push(thisSide)
-                                }
-                            }
-                            wrapper.innerHTML = sides.join("<br>")
-                        } else if (type == "dessert") {
-                            while (desserts.length < numberDesserts) {
-                                const thisDessert = fancyDessert[Math.floor(Math.random()*4)]
-                                if (!desserts.includes(thisDessert)) {
-                                    desserts.push(thisDessert)
-                                }
-                            }
-                            wrapper.innerHTML = desserts.join("<br>")
+                    `
+                    const wrapper = document.createElement("section")
+
+                    const numberDishes = randomIntFromInterval(minDishes,maxDishes)
+                    
+                    let dishes = []
+                    const list = document.createElement("ul")
+                    list.classList.add("menu")
+                    while (dishes.length < numberDishes) {
+                        const thisDish = dishList[Math.floor(Math.random()*dishList.length)]
+                        if (!dishes.includes(thisDish)) {
+                            dishes.push(thisDish)
+                            let item = document.createElement("li")
+                            item.classList.add("menu-item")
+                            item.innerText = thisDish
+                            list.appendChild(item)
                         }
                     }
+                    wrapper.appendChild(list)
                     
-                    shadow.appendChild(wrapper)
+                    shadowRoot.appendChild(style)
+                    shadowRoot.appendChild(wrapper)
                 }
-
-                
             }
-
             customElements.define("food-menu", FoodMenu)
 </script>
     </head>
     <body>
-        <div>
-            <h2>Poor Quality</h2>
-            <h3>Main Dishes</h3>
-            <food-menu quality="poor" type="main"></food-menu>
-            <h3>Side Dishes</h3>
-            <food-menu quality="poor" type="side"></food-menu>
-        </div>
-        <div>
-            <h2>Common Quality</h2>
-            <h3>Main Dishes</h3>
-            <food-menu quality="common" type="main"></food-menu>
-            <h3>Side Dishes</h3>
-            <food-menu quality="common" type="side"></food-menu>
-        </div>
-        <div>
-            <h2>Fancy Quality</h2>
-            <h3>Main Dishes</h3>
-            <food-menu quality="fancy" type="main"></food-menu>
-            <h3>Side Dishes</h3>
-            <food-menu quality="fancy" type="side"></food-menu>
-            <h3>Desserts</h3>
-            <food-menu quality="fancy" type="dessert"></food-menu>
-        </div>
+        <vellum-doc>
+            <section id="document">
+                <section>
+                    <figure class="header">
+                        <img src="img/Banquet_du_paon.jpg">
+                    </figure>
+                    <header>
+                        <h1>On the Menu: What's for Dinner in Dolmenwood</h1>
+                        <p>Being a generator of delectable delights for every budget.</p>
+                    </header>
+                </section>
+                <section>
+                    <h3 id="return" part="index-h3"><a href="index.html">Home</a> or: </h3>
+                </section>
+                <section>
+                    <h1>Poor</h1>
+                    <h2>Main Dishes</h2>
+                    <food-menu quality="poor" type="main"></food-menu>
+                    <h2>Side Dishes</h2>
+                    <food-menu quality="poor" type="side"></food-menu>
+                </section>
+                <section>
+                        <h1>Common</h1>
+                        <h2>Main Dishes</h2>
+                        <food-menu quality="common" type="main"></food-menu>
+                        <h2>Side Dishes</h2>
+                        <food-menu quality="common" type="side"></food-menu>
+                </section>
+                <section>
+                        <h1>Fancy</h1>
+                        <h2>Main Dishes</h2>
+                        <food-menu quality="fancy" type="main"></food-menu>
+                        <h2>Side Dishes</h2>
+                        <food-menu quality="fancy" type="side"></food-menu>
+                        <h2>Desserts</h2>
+                        <food-menu quality="fancy" type="dessert"></food-menu>
+                </section>
+            </section>
+        </vellum-doc>        
     </body>
 </html>
+
