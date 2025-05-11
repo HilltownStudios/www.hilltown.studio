@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Dolmenwood: What's on the Menu?
+        </title>
+        <script lang="javascript">
+            const poorMain = [
+                "Battered pizzle",
+                "Blood porridge",
+                "Bubble and squeak",
+                "Dregger's pie",
+                "Fisher's gruel",
+                "Roast wellington",
+                "Special pasty",
+                "Woad in the hole"
+            ]
+            const poorSide = [
+                "Codswallop",
+                "Pig's ear",
+                "Sourcroute",
+                "Wormskin"
+            ]
+            const commonMain = [
+                "Mutton roast",
+                "Onion sandwich",
+                "Pook's pudding",
+                "Puggle pie",
+                "Sausage and mash",
+                "Shanky",
+                "Snail skewers",
+                "Trottel mash"
+            ]
+            const commonSide = [
+                "Pickled eggs",
+                "Coldlanks",
+                "Hameth sprats",
+                "Ruddy chad"
+            ]
+            const fancyMain = [
+                "Blackbird pie",
+                "Brathering",
+                "Jellied lamprey",
+                "Longmere pike",
+                "Maids-o'-the-lake",
+                "Roast lurkey",
+                "Unicorn rump",
+                "Whole suckling pig"
+            ]
+            const fancySide = [
+                "Larks' tongues in aspic",
+                "Old Shuck",
+                "Sparrey",
+                "Vinegared troll moss"
+            ]
+            const fancyDessert = [
+                "Fondant pastries",
+                "Sugared plums",
+                "Trifle",
+                "Walnut tarts"
+            ]
+
+            function randomIntFromInterval(min, max) { // min and max included 
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+
+            class FoodMenu extends HTMLElement {
+                /*
+                General kind of food menu. Uses attributes to choose the quality and type.
+                */
+                constructor () {
+                    super()
+                }
+
+                connectedCallback() {
+                    const quality = this.getAttribute("quality") // poor, common, fancy
+                    const type = this.getAttribute("type") // main, side, dessert
+
+                    const shadow = this.attachShadow({mode: "open"})
+                    const wrapper = document.createElement("div")
+
+                    const numberMains = randomIntFromInterval(3,4)
+                    const numberSides = randomIntFromInterval(1,2)
+                    const numberDesserts = randomIntFromInterval(1,2)   // only for fancy quality
+                    var mains = []
+                    var sides = []
+                    var desserts = []
+
+                    if (quality == "poor") {
+                        if (type == "main") {
+                            while (mains.length < numberMains) {
+                                const thisMain = poorMain[Math.floor(Math.random()*8)]
+                                if (!mains.includes(thisMain)) {
+                                    mains.push(thisMain)
+                                }
+                            }
+                            wrapper.innerHTML = mains.join("<br>")
+                        } else {
+                            while (sides.length < numberSides) {
+                                const thisSide = poorSide[Math.floor(Math.random()*4)]
+                                if (!sides.includes(thisSide)) {
+                                    sides.push(thisSide)
+                                }
+                            }
+                            wrapper.innerHTML = sides.join("<br>")
+                        }
+                    } else if (quality == "common") {
+                        if (type == "main") {
+                            while (mains.length < numberMains) {
+                                const thisMain = commonMain[Math.floor(Math.random()*8)]
+                                if (!mains.includes(thisMain)) {
+                                    mains.push(thisMain)
+                                }
+                            }
+                            wrapper.innerHTML = mains.join("<br>")
+                        } else {
+                            while (sides.length < numberSides) {
+                                const thisSide = commonSide[Math.floor(Math.random()*4)]
+                                if (!sides.includes(thisSide)) {
+                                    sides.push(thisSide)
+                                }
+                            }
+                            wrapper.innerHTML = sides.join("<br>")
+                        }
+                    } else if (quality == "fancy") {
+                        if (type == "main") {
+                            while (mains.length < numberMains) {
+                                const thisMain = poorMain[Math.floor(Math.random()*8)]
+                                if (!mains.includes(thisMain)) {
+                                    mains.push(thisMain)
+                                }
+                            }
+                            wrapper.innerHTML = mains.join("<br>")
+                        } else if (type == "side") {
+                            while (sides.length < numberSides) {
+                                const thisSide = poorSide[Math.floor(Math.random()*4)]
+                                if (!sides.includes(thisSide)) {
+                                    sides.push(thisSide)
+                                }
+                            }
+                            wrapper.innerHTML = sides.join("<br>")
+                        } else if (type == "dessert") {
+                            while (desserts.length < numberDesserts) {
+                                const thisDessert = fancyDessert[Math.floor(Math.random()*4)]
+                                if (!desserts.includes(thisDessert)) {
+                                    desserts.push(thisDessert)
+                                }
+                            }
+                            wrapper.innerHTML = desserts.join("<br>")
+                        }
+                    }
+                    
+                    shadow.appendChild(wrapper)
+                }
+
+                
+            }
+
+            customElements.define("food-menu", FoodMenu)
+</script>
+    </head>
+    <body>
+        <div>
+            <h2>Poor Quality</h2>
+            <h3>Main Dishes</h3>
+            <food-menu quality="poor" type="main"></food-menu>
+            <h3>Side Dishes</h3>
+            <food-menu quality="poor" type="side"></food-menu>
+        </div>
+        <div>
+            <h2>Common Quality</h2>
+            <h3>Main Dishes</h3>
+            <food-menu quality="common" type="main"></food-menu>
+            <h3>Side Dishes</h3>
+            <food-menu quality="common" type="side"></food-menu>
+        </div>
+        <div>
+            <h2>Fancy Quality</h2>
+            <h3>Main Dishes</h3>
+            <food-menu quality="fancy" type="main"></food-menu>
+            <h3>Side Dishes</h3>
+            <food-menu quality="fancy" type="side"></food-menu>
+            <h3>Desserts</h3>
+            <food-menu quality="fancy" type="dessert"></food-menu>
+        </div>
+    </body>
+</html>
