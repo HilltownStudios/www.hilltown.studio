@@ -63,6 +63,52 @@
                         "Sugared plums",
                         "Trifle",
                         "Walnut tarts"
+                    ],
+                    commonBeverage: [
+                        "Barrowblaster",
+                        "Keye's Balm",
+                        "Marrowhyte Dark",
+                        "Pilston's Heartbreaker",
+                        "Bard's Cordial",
+                        "Old Swythener",
+                        "Prigwort Tipple",
+                        "Mason's"
+                    ],
+                    uncommonBeverage: [
+                        "Cobsworth Pale",
+                        "Cobsworth Pale",
+                        "Halthwidden's",
+                        "Merryweather",
+                        "Tithelands Cider",
+                        "Tithelands Cider",
+                        "Glubwob",
+                        "Mead",
+                        "Mead",
+                        "Distillation of Dusk",
+                        "Ether of Blue",
+                        "Pokey Nog",
+                        "Pokey Nog",
+                        "Porrid's Full Moon",
+                        "The Night Liqueur",
+                        "Wakelyke's Scarlet",
+                        "Earl Yellow Tea",
+                        "Buckston Fizz",
+                        "Faggley's Iced",
+                        "Inkling" 
+                    ],
+                    rareBeverage: [
+                        "Moon's Milk",
+                        "Nippers",
+                        "Nippers",
+                        "Lord Oberon's Ambrosial",
+                        "Prigwort Pure",
+                        "Prigwort Pure",
+                        "Purple Aspintheon",
+                        "Tomfoy's",
+                        "Tomfoy's",
+                        "Lady Mauve",
+                        "The Cold Prince",
+                        "Underbrood's Vintage"
                     ]
                 }
             }
@@ -80,12 +126,11 @@
                 }
 
                 connectedCallback() {
-                    const quality = this.getAttribute("quality") // poor, common, fancy
                     const type = this.getAttribute("type") // main, side, dessert
-                    const accessor = quality + String(type).charAt(0).toUpperCase() + String(type).slice(1)
-                    const dishList = dishLists()[accessor]
-                    const maxDishes = dishList.length / 2   // as long as the dish lists are all even!
-                    const minDishes = maxDishes - 1
+                    const dishList = dishLists()[type]
+                    const maxDishes = Number(this.getAttribute("maxDishes")) ? Number(this.getAttribute("maxDishes")) : dishList.length / 2
+                    const minDishes = Number(this.getAttribute("minDishes")) ? Number(this.getAttribute("minDishes")) : maxDishes - 1
+
 
                     const shadowRoot = this.attachShadow({mode: "open"})
                     const style = document.createElement("style")
@@ -135,33 +180,61 @@
                     <header>
                         <h1>On the Menu: What's for Dinner in Dolmenwood</h1>
                         <p>Being a generator of delectable delights for every budget.</p>
+                        <p>See the DPB for descriptions, as well as beverage costs.</p>
                     </header>
                 </section>
                 <section>
                     <h3 id="return" part="index-h3"><a href="index.html">Home</a> or: </h3>
                 </section>
                 <section>
-                    <h1>Poor</h1>
+                    <h1 id="poor" part="index-h1">Poor</h1>
                     <h2>Main Dishes</h2>
-                    <food-menu quality="poor" type="main"></food-menu>
+                    <p>Cost: 1sp each</p>
+                    <food-menu type="poorMain"></food-menu>
                     <h2>Side Dishes</h2>
-                    <food-menu quality="poor" type="side"></food-menu>
+                    <p>Cost: 5cp each</p>
+                    <food-menu type="poorSide"></food-menu>
+                    <h2>Beverages</h2>
+                    <p>Cost: Varies</p>
+                    <h3>Common</h3>
+                    <food-menu type="commonBeverage" minDishes="3" maxDishes="4"></food-menu>
+                    <h3>Uncommon</h3>
+                    <food-menu type="uncommonBeverage" minDishes="1" maxDishes="1"></food-menu>
                 </section>
                 <section>
-                        <h1>Common</h1>
-                        <h2>Main Dishes</h2>
-                        <food-menu quality="common" type="main"></food-menu>
-                        <h2>Side Dishes</h2>
-                        <food-menu quality="common" type="side"></food-menu>
+                    <h1 id="common" part="index-h1">Common</h1>
+                    <h2>Main Dishes</h2>
+                    <p>Cost: 3sp each</p>
+                    <food-menu type="commonMain"></food-menu>
+                    <h2>Side Dishes</h2>
+                    <p>Cost: 2sp each</p>
+                    <food-menu type="commonSide"></food-menu>
+                    <h2>Beverages</h2>
+                    <p>Cost: Varies</p>
+                    <h3>Common</h3>
+                    <p>All common</p>
+                    <h3>Uncommon</h3>
+                    <food-menu type="uncommonBeverage" minDishes="3" maxDishes="4"></food-menu>
                 </section>
                 <section>
-                        <h1>Fancy</h1>
-                        <h2>Main Dishes</h2>
-                        <food-menu quality="fancy" type="main"></food-menu>
-                        <h2>Side Dishes</h2>
-                        <food-menu quality="fancy" type="side"></food-menu>
-                        <h2>Desserts</h2>
-                        <food-menu quality="fancy" type="dessert"></food-menu>
+                    <h1 id="fancy" part="index-h1">Fancy</h1>
+                    <h2>Main Dishes</h2>
+                    <p>Cost: 2gp each</p>
+                    <food-menu type="fancyMain" minDishes=""></food-menu>
+                    <h2>Side Dishes</h2>
+                    <p>Cost: 15sp each</p>
+                    <food-menu type="fancySide"></food-menu>
+                    <h2>Desserts</h2>
+                    <p>Cost: 2gp each</p>
+                    <food-menu type="fancyDessert"></food-menu>
+                    <h2>Beverages</h2>
+                    <p>Cost: Varies</p>
+                    <h3>Common</h3>
+                    <p>All common</p>
+                    <h3>Uncommon</h3>
+                    <p>All uncommon</p>
+                    <h3>Rare</h3>
+                    <food-menu type="rareBeverage" minDishes="3" maxDishes="4"></food-menu>
                 </section>
             </section>
         </vellum-doc>        
