@@ -21,13 +21,6 @@
 @font-face {
   font-family: helpMe; /* set name */
   src: url(secret-labs.normal.ttf); /* url of the font */
-}
-
-.passage[data-passage="Title Screen"] {
-  background-image: url(TitleScreenNoText.png);
-  background-size: cover;       /* scales image to fill window */
-  background-repeat: no-repeat; /* avoids tiling */
-  background-position: center;  /* centers image */
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Nonsensorium" tags="" position="575,300" size="100,100">(forget-undos:1)
 (set: $scratchText to &quot;ANNWHOISALICEIAMMARYANNWHOISALICEIAMMARYANNWHOISALICEIAM&quot;)
 
@@ -135,11 +128,13 @@ Alice has died.
 
 Turn. Click. The door opens.
 
-[[Open the door-&gt;The end]]</tw-passagedata><tw-passagedata pid="16" name="Title Screen" tags="" position="75,300" size="100,100"># Who Are You?
+[[Open the door-&gt;The end]]</tw-passagedata><tw-passagedata pid="16" name="Title Screen" tags="" position="75,300" size="100,100">(bg: &quot;TitleScreenNoText.png&quot;)[
+# Who Are You?
 
 A mercifully brief interactive fiction game by Aaron, Cait, Jelani, and Michelle
 
-[[Enter-&gt;A strange room]] </tw-passagedata></tw-storydata>
+[[Enter-&gt;A strange room]] 
+]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
