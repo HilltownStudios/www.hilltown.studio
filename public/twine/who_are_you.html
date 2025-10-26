@@ -9,7 +9,7 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Who Are You.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Who Are You" startnode="4" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="AE4DC7DD-837A-4167-85DB-96B515A95BE7" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.fade-in {
+<tw-storydata name="Who Are You" startnode="16" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="AE4DC7DD-837A-4167-85DB-96B515A95BE7" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.fade-in {
     animation: fadeIn 1s forwards;
 }
 
@@ -22,39 +22,44 @@
   font-family: helpMe; /* set name */
   src: url(https://st.1001fonts.net/download/font/secret-labs.normal.ttf); /* url of the font */
 }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Nonsensorium" tags="" position="575,300" size="100,100">(forget-undos:1)
+
+.passage[data-passage="Title Screen"] {
+  background-image: url("http://www.hilltown.studio/twine/TitleScreenNoText.png");
+  background-size: cover;       /* scales image to fill window */
+  background-repeat: no-repeat; /* avoids tiling */
+  background-position: center;  /* centers image */
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Nonsensorium" tags="" position="575,300" size="100,100">(forget-undos:1)
 (set: $scratchText to &quot;ANNWHOISALICEIAMMARYANNWHOISALICEIAMMARYANNWHOISALICEIAM&quot;)
 
 *splash* 
 
-It&#39;s dark and wet in here. You don&#39;t really know where here is, and there doesn&#39;t appear to be an exit. 
+It&#39;s dark and wet in here. You don&#39;t really know where here is, and there doesn&#39;t appear to be an exit. The water in here reaches your waist.
 
-(if: $opacity is 0)[(t8n-delay:3s)+(t8n:&quot;dissolve&quot;)[At length you become aware of a series of faint, glowing crisscross marks on the walls that leave the impression of letters.]](else-if: $opacity &lt; 1)[The algae encrusted into the marks bursts with bioluminescence. These marks, scratches really, form letters in repetition: |foo&gt;[(font: &quot;helpMe&quot;)[$scratchText]]](else:)[The inside of the tank is illuminated by the glowing letters: (font: &quot;helpMe&quot;)[$scratchText]
+&quot;How can there be a room with an entrance and no exit?&quot; you muse aloud. There is no echo.
 
-Lying in the water is a skeleton. Waterlogged fragments of blue gingham wrap around the bones, and strands of blonde hair wave in the water.
+(if: $opacity is 0)[(t8n-delay:3s)+(t8n:&quot;dissolve&quot;)[At length you become aware of a series of faint, glowing crisscross marks on the walls that leave the impression of letters.]](else-if: $opacity &lt; 1)[The algae encrusted into the marks bursts with bioluminescence. These marks, scratches really, form letters in repetition: |foo&gt;[(font: &quot;helpMe&quot;)[$scratchText]]](else:)[The inside of the chamber is illuminated by the glowing letters: (font: &quot;helpMe&quot;)[$scratchText]
 
-(if: $key is 0)[One skeletal hand holds a key. The other holds a chain that leads to a plug. (link: &quot;Take the key.&quot;)[(set: $key to 1)(go-to: &quot;Nonsensorium&quot;)] [[Pull the plug-&gt;Wet room]]](else:)[One skeletal hand holds a chain that leads to a plug. [[Pull the plug-&gt;Wet room]]]
+Lying in the water, barely visible in the murk, is a skeleton. Waterlogged fragments of blue gingham wrap around the bones, and strands of blonde hair wave in the water.
+
+One skeletal hand holds a chain that leads to some sort of key, which is plugging up a hole.
+
+[[Take the key-&gt;Wet room]]
+[[Feel around in the water-&gt;Drowned]] 
+
 ]
 (change: ?foo, (opacity: $opacity))(if: $opacity &lt; 1)[(link: &quot;trace the scratches&quot;)[(set: $opacity to it + 0.2)(go-to: &quot;Nonsensorium&quot;)]]
 
-(if: $aliceSize is -1)[[You flail in the deep water-&gt;Drowned]]
-(else-if: $aliceSize is 1)[[You expand, feeling the walls closing in on you-&gt;Crushed]]
-
-(if: $aliceSize is -1)[(link: &quot;Nibble the cake&quot;)[(set: $aliceSize to it + 1) (go-to: &quot;Nonsensorium&quot;)]](else-if: $aliceSize is 0)[(link: &quot;Sip the potion&quot;)[(set: $aliceSize to it - 1) (go-to: &quot;Nonsensorium&quot;)] || (link: &quot;Nibble the cake&quot;)[(set: $aliceSize to it + 1) (go-to: &quot;Nonsensorium&quot;)]](else-if: $aliceSize is 1)[(link: &quot;Sip the potion&quot;)[(set: $aliceSize to it - 1) (go-to: &quot;Nonsensorium&quot;)]]</tw-passagedata><tw-passagedata pid="2" name="Crushed" tags="" position="575,175" size="100,100">(forget-undos:1)
-You grow and grown, but the sides of the cylinder only begin to bulge long after the pressure has caused you to lose consciousness. After your bones break beneath the strain.🪦
-
-Alice has died.
-[[Start over-&gt;A strange room]]</tw-passagedata><tw-passagedata pid="3" name="Drowned" tags="" position="575,425" size="100,100">(forget-undos: 1)
+</tw-passagedata><tw-passagedata pid="2" name="Drowned" tags="" position="575,425" size="100,100">(forget-undos: 1)
 You tread water for as long as you can, but eventually your strength gives out, and your head sinks beneath the murky surface. The last thing you see before you drown:
 
 (font: &quot;helpMe&quot;)[$scratchText]🪦
 
 Alice has died.
-[[Start over-&gt;A strange room]]</tw-passagedata><tw-passagedata pid="4" name="A strange room" tags="" position="200,300" size="100,100">You open the door and find that it leads into a small passage, not much larger than a rat-hole: you kneel down and look along the passage into the loveliest garden you ever saw. How you long to get out of the dark hall, and wander about among those beds of bright flowers and those cool fountains, but you cannot even get your head through the doorway…
+[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="3" name="A strange room" tags="" position="200,300" size="100,100">You open the door and find that it leads into a small passage, not much larger than a rat-hole: you kneel down and look along the passage into the loveliest garden you ever saw. How you long to get out of the dark hall, and wander about among those beds of bright flowers and those cool fountains, but you cannot even get your head through the doorway…
 
 … There seems to be no use in waiting by the little door, so you go back to the table, half hoping you might find another key on it…
 
-[[Look on the table-&gt;A small bottle]]</tw-passagedata><tw-passagedata pid="5" name="A small bottle" tags="" position="325,300" size="100,100">As you approach the table, you hope to find a key or a book of rules explaining what to do next. Instead, you find a little bottle on it, which certainly was not here before. Around the neck of the bottle is a paper label marked “DRINK ME.” But you are wise, and know better than to do that in a hurry. You look closer, and see an indication to peel the label off. Underneath is another paper label marked “NOT POISON.”
+[[Look on the table-&gt;A small bottle]]</tw-passagedata><tw-passagedata pid="4" name="A small bottle" tags="" position="325,300" size="100,100">As you approach the table, you hope to find a key or a book of rules explaining what to do next. Instead, you find a little bottle on it, which certainly was not here before. Around the neck of the bottle is a paper label marked “DRINK ME.” But you are wise, and know better than to do that in a hurry. You look closer, and see an indication to peel the label off. Underneath is another paper label marked “NOT POISON.”
 
 “PHEW” you think. You had never forgotten that, if you drink much from a bottle marked poison, it is almost certain to disagree with you, sooner or later. 
 
@@ -63,49 +68,46 @@ What do you do?
 [[Take a sip from the bottle-&gt;Sip]]
 [[Down the whole bottle in one gulp-&gt;Gulp]]
 
-</tw-passagedata><tw-passagedata pid="6" name="The table" tags="" position="450,300" size="100,100">At your new telescopic height, your neck sways in the wind and your legs wobble as you walk. You are just tall enough to reach the edge of the table if you stretch your arms over your head and stand on your tippy-toes or made a little hop. “Almost…” you think, realizing you might be able to hoist yourself over the edge of the table and reach for the key with the help of a running start. Or, perhaps, one strong vertical jump might be all it takes.
+</tw-passagedata><tw-passagedata pid="5" name="The table" tags="" position="450,300" size="100,100">At your new height, you are just tall enough to reach the edge of the table if you stretch your arms over your head and stand on your tippy-toes or make a little hop. “Almost…” you think, realizing you might be able to hoist yourself over the edge of the table and reach for the key with the help of a running start. Or, perhaps, one strong vertical jump might be all it takes.
 
 [[Running start]]
-[[Jump]] </tw-passagedata><tw-passagedata pid="7" name="Sip" tags="" position="325,175" size="100,100">You take a sip from the bottle, and find it very nice (it had, in fact, a sort of mixed flavour of cherry-tart, custard, pineapple, roast turkey, toffee, and hot buttered toast). Curiously, you find yourself growing away from your feet!
+[[Jump]] </tw-passagedata><tw-passagedata pid="6" name="Sip" tags="" position="325,175" size="100,100">You take a sip from the bottle, and find it very nice (it had, in fact, a sort of mixed flavour of cherry-tart, custard, pineapple, roast turkey, toffee, and hot buttered toast). Curiously, you find the table grows farther away from you, only to realize you’re shrinking away from it! And so it was indeed, you are now merely ten inches high. 
 
-[[Go on-&gt;The table]]</tw-passagedata><tw-passagedata pid="8" name="Gulp" tags="" position="325,425" size="100,100">(forget-undos:1)
+[[Go on-&gt;The table]]</tw-passagedata><tw-passagedata pid="7" name="Gulp" tags="" position="325,425" size="100,100">(forget-undos:1)
 You suck up every last drop - but instead of feeling your thirst quench, you find each gulp makes you further and further parched. How strange, your feet get smaller as you stare at your shoes, and your vision starts to fade altogether. The not poison may have disagreed that it’s not poison, especially considering your greedy gulp. Foolish child, you have learned your lesson now. Too late, too late. You note the flavors of cherry-tart, turkey, and vile as your throat closes up and you lose consciousness. 🪦
 
 Alice has died.
-[[Start over-&gt;A strange room]]</tw-passagedata><tw-passagedata pid="9" name="Running start" tags="" position="450,175" size="100,100">(if: $jumped is 0)[You take ten steps away from the table, turn around and trace your path with your gaze. You stand on your toes before tipping over into a sprint that grows stronger with each step. As you reach the table, you join your feet into a decisive jump, pushing your body onto the top of the table as if you were pulling yourself out of a pool, then sit with your legs dangling over the table’s edge in triumph…](else:)[
+[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="8" name="Running start" tags="" position="450,175" size="100,100">You take ten steps away from the table, turn around and trace your path with your gaze. You stand on your toes before tipping over into a sprint that grows stronger with each step. As you reach the table, you join your feet into a decisive jump, pushing your body onto the top of the table as if you were pulling yourself out of a pool, then sit with your legs dangling over the table’s edge in triumph…
  
 Before you is another container that looks like a bottle, but it&#39;s as big as you are. It&#39;s labeled &quot;NONSENSORIUM. TOUCH ME.&quot;
-]
 
-[[Touch the bottle-&gt;Nonsensorium]]</tw-passagedata><tw-passagedata pid="10" name="Jump" tags="" position="450,425" size="100,100">(forget-undos:1)
+[[Touch the bottle-&gt;Nonsensorium]]</tw-passagedata><tw-passagedata pid="9" name="Jump" tags="" position="450,425" size="100,100">(forget-undos:1)
 Maybe you are Mabel after all. You join your feet into a decisive plié and jump, but your arms fail to pull you up onto the table top and your body dangles like a shrimp on a fork. Your legs are scrunched into your chest and any effort of swinging yourself upward only makes the table wobble. You try to pull yourself up with your feeble arms, your legs kicking wildly. As you pul, your legs begin to swing, and you feel yourself recovering some of your lost momentum. But the violence of your struggle and the weight of your body tip the table off its legs. You fall to the ground. The iron stand topples like a felled tree, and the glass top slides off. 
 
 Off with your head. 🪦
 
 Alice has died.
-[[Start over-&gt;A strange room]]</tw-passagedata><tw-passagedata pid="11" name="Speak" tags="" position="825,300" size="100,100">SPEAK
-(if: $response is not 0)[&quot;(verbatim-print: $response)&quot;]
-(input: bind $response)
+[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="10" name="Speak" tags="" position="700,300" size="100,100">SPEAK
+(if: $response is not 0 and visits &lt;3)[&quot;(verbatim-print: $response)&quot; (input: bind $response)](else:)[(force-input: bind $response, &quot;WHO AM I?&quot;)]
+
 
 (if: $response is not 0)[[[Speak-&gt;Speak]]]
 [[Remain silent-&gt;Speak]]
 
-(if: visits &gt; 3)[
+(if: $response is &quot;WHO AM I?&quot;)[
 There is a door here.
 
 [[Approach the door-&gt;Who are you]]
-]</tw-passagedata><tw-passagedata pid="12" name="Who are you" tags="" position="950,300" size="100,100">The door has a note and two caterpillar eyes: To open the door, insert the key and answer the riddle: &quot;who are you?&quot;
-At first you have two options - &quot;I think you ought to tell me who you are, first&quot;, and &quot;I hardly know, door&quot;
-If the former,  they ask &quot;why?&quot;
-If the latter, they say &quot;then you can&#39;t open the door”
- 
-You won&#39;t be able to properly answer until you have the key; once acquired, a third option to the riddle appears of &quot;Alice&quot;
- 
-Maybe incorporate some other quotes
-&quot;I can&#39;t explain myself, I&#39;m afraid, Sir, because I&#39;m not myself, you see&quot;
-&quot;Dear, dear! How queer everything is to-day! And yesterday things went on just as usual, I wonder if I&#39;ve changed in the night? Let me think: Was I the same when I got up this morning? I almost think I can remember feeling a little different. But if I&#39;m not the same, the next question is, who in the world am i? Ah, that&#39;s the great puzzle!&quot;
+]</tw-passagedata><tw-passagedata pid="11" name="Who are you" tags="" position="825,300" size="100,100">Key in hand and standing tall at 10 centimeters, you reapproach the small door leading to the lovely garden. You try to open it again to find it locked, and realize the key you have in hand doesn’t fit in the keyhole itself. Poor you, you sit down and cry. 
 
-[[Exit-&gt;The end]]</tw-passagedata><tw-passagedata pid="13" name="The end" tags="" position="1075,300" size="100,100">(forget-undos:1)
+“Come, there’s no use in crying like that!” you say to yourself sharply, take a step back, and take a closer look at the door.
+
+You make note of two carved bug eyes and a set of wooden lips in the center of the door. You hear a creak, and realize the door’s wooden lips are moving. “Who are you?”
+
+“Dear, dear - how queer everything is today!” you think as you ponder the door’s riddle. You wonder if you had changed in the night. “Let me think: Was I the same when I got up this morning? I almost think I can remember feeling a little different. But if I&#39;m not the same, the next question is, who in the world am I? Ah, that&#39;s the great puzzle.”
+
+[[&quot;I can&#39;t explain myself, I&#39;m afraid, Sir, because I&#39;m not myself, you see.&quot;-&gt;Off with her head]]
+[[“I can’t quite explain who I am, but I can say that my name Alice”-&gt;Keyhole]]</tw-passagedata><tw-passagedata pid="12" name="The end" tags="" position="950,300" size="100,100">(forget-undos:1)
 “Success! I made it through!” you cheer. “It took some effort but it was all well worth it. And what beautiful light! This garden is more beautiful than I’d expected.” 
 
 The air is thick with the scent of flowers, and a haze of what looks like speckles of gold swirls through the air. You take a deep breath of satisfaction, but the air feels prickly in your throat. 
@@ -117,9 +119,28 @@ A tickle turns into a scratch, then you start to heave. Your head feels heavy, a
 Oh, Alice. What an awful way to learn you’re deathly allergic to pollen... 🪦
 
 Alice has died.
-[[Start over-&gt;A strange room]]</tw-passagedata><tw-passagedata pid="14" name="Wet room" tags="" position="700,300" size="100,100">Water rushes out of the Nonsensorium. You can exit.
+[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="13" name="Wet room" tags="" position="575,175" size="100,100">Water rushes out of the Nonsensorium. You can exit.
 
-[[Exit-&gt;Speak]]</tw-passagedata></tw-storydata>
+[[Exit-&gt;Speak]]</tw-passagedata><tw-passagedata pid="14" name="Off with her head" tags="" position="825,425" size="100,100">(forget-undos:1)
+“What do you mean by that?” croaks the door. “Explain yourself!”
+
+“I can’t explain myself, I’m afraid, Sir,” you begin your earnest attempt at an explanation. “Because I’m not myself, you see.”
+
+“I don’t see, and NEITHER WILL YOU. OFF WITH YOUR HEAD” Suddenly the door swings open at a crushing force, and directly sandwiches you against the wall. Your vision fades as your eyes pop out through the sheer pressure, and your head pops right off. 🪦
+
+Alice has died.
+[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="15" name="Keyhole" tags="" position="825,175" size="100,100">“What kind of name is Alice?” creaks the door, but you see its lips start to form into a new keyhole and its dictation of “Alice” sounds more like “Aloo”. You lift your hand with the key and see it’s likely to be a perfect fit. 
+
+“My kind of name, sir. And I’d appreciate it if you&#39;d take care of its pronunciation as it is MY name and you can’t tell me otherwise” and you insert the key into the newly revealed hole. 
+
+Turn. Click. The door opens.
+
+[[Open the door-&gt;The end]]</tw-passagedata><tw-passagedata pid="16" name="Title Screen" tags="" position="75,300" size="100,100">(bg: &quot;&quot;)[Title Screen - No Text]
+# Who Are You?
+
+A mercifully brief interactive fiction game by Aaron, Cait, Jelani, and Michelle
+
+[[Enter-&gt;A strange room]] </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
