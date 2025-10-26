@@ -21,7 +21,8 @@
 @font-face {
   font-family: helpMe; /* set name */
   src: url(secret-labs.normal.ttf); /* url of the font */
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Nonsensorium" tags="" position="575,300" size="100,100">(forget-undos:1)
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Nonsensorium" tags="" position="575,300" size="100,100">(forget-undos:1)
 (set: $scratchText to &quot;ANNWHOISALICEIAMMARYANNWHOISALICEIAMMARYANNWHOISALICEIAM&quot;)
 
 *splash* 
@@ -80,18 +81,34 @@ Maybe you are Mabel after all. You join your feet into a decisive plié and jump
 Off with your head. 🪦
 
 Alice has died.
-[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="10" name="Speak" tags="" position="700,300" size="100,100">SPEAK
-(if: $response is not 0 and visits &lt;3)[&quot;(verbatim-print: $response)&quot; (input: bind $response)](else:)[(force-input: bind $response, &quot;WHO AM I?&quot;)]
+[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="10" name="Speak" tags="" position="700,300" size="100,100">(forget-undos:1)
+You reapproach the small door standing at a bold 10 inches tall, key in hand, and sporting sopping wet shoes. You try to open it again as you did earlier only to find it locked, and realize the key you have in hand doesn’t fit in the keyhole itself. Poor you, you sit down and cry. 
 
+“Come, there’s no use in crying like that!” you say to yourself sharply, take a step back, and take a closer look at the door.
 
-(if: $response is not 0)[[[Speak-&gt;Speak]]]
-[[Remain silent-&gt;Speak]]
+You make note of two carved bug eyes and a set of wooden lips in the center of the door. You hear a creak, and realize the door’s wooden lips are moving. 
 
-(if: $response is &quot;WHO AM I?&quot;)[
-There is a door here.
+“Who are you? Speak.”
+|foo&gt;[(input:)Say it]
+[(click: &quot;Say it&quot;)[(replace:?foo)[
+“Dear, dear - how queer everything is today!” you think as you ponder the door’s riddle. You wonder if you had changed in the night. “Let me think: Was I the same when I got up this morning? I almost think I can remember feeling a little different. But if I&#39;m not the same, the next question is, who in the world am I? Ah, that&#39;s the great puzzle.”]
+“Who are you? Speak.”
+|bar&gt;[(input:)Say it]
+[(click: &quot;Say it&quot;)[(replace: ?bar)[
+“I’m sure I’m not Ada, for her hair goes in such long ringlets, and mine doesn’t go in ringlets at all; and I’m sure I can’t be Mabel, for I know all sorts of things, and she, oh, she knows such a very little! Besides she’s she, and I’m I, and oh dear, how puzzling it all is!]
+“Who are you? Speak.”
+|baz&gt;[(input:)Say it]
+(click: &quot;Say it&quot;)[(replace: ?baz)[
+The sound of wood creaking nearly blows out your eardrums, as the door croaks in frustration: “I DON’T SEE!”
 
-[[Approach the door-&gt;Who are you]]
-]</tw-passagedata><tw-passagedata pid="11" name="Who are you" tags="" position="825,300" size="100,100">Key in hand and standing tall at 10 centimeters, you reapproach the small door leading to the lovely garden. You try to open it again to find it locked, and realize the key you have in hand doesn’t fit in the keyhole itself. Poor you, you sit down and cry. 
+You pout and exclaim “I’m afraid I ca’n’t put it more clearly,” but before you can continue your response the wooden face before you contorts into a newly formed keyhole directly in the center of the door. You lift your hand with the key and see it’s likely to be a perfect fit. 
+
+Turn. Click. The door opens. 
+
+[[Open the door-&gt;Keyhole]]
+]]
+]]
+]]</tw-passagedata><tw-passagedata pid="11" name="Who are you" tags="" position="975,500" size="100,100">Key in hand and standing tall at 10 centimeters, you reapproach the small door leading to the lovely garden. You try to open it again to find it locked, and realize the key you have in hand doesn’t fit in the keyhole itself. Poor you, you sit down and cry. 
 
 “Come, there’s no use in crying like that!” you say to yourself sharply, take a step back, and take a closer look at the door.
 
@@ -122,21 +139,18 @@ Alice has died.
 “I don’t see, and NEITHER WILL YOU. OFF WITH YOUR HEAD” Suddenly the door swings open at a crushing force, and directly sandwiches you against the wall. Your vision fades as your eyes pop out through the sheer pressure, and your head pops right off. 🪦
 
 Alice has died.
-[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="15" name="Keyhole" tags="" position="825,175" size="100,100">“What kind of name is Alice?” creaks the door, but you see its lips start to form into a new keyhole and its dictation of “Alice” sounds more like “Aloo”. You lift your hand with the key and see it’s likely to be a perfect fit. 
+[[Start over-&gt;Title Screen]]</tw-passagedata><tw-passagedata pid="15" name="Keyhole" tags="" position="825,150" size="100,100">“What kind of name is Alice?” creaks the door, but you see its lips start to form into a new keyhole and its dictation of “Alice” sounds more like “Aloo”. You lift your hand with the key and see it’s likely to be a perfect fit. 
 
 “My kind of name, sir. And I’d appreciate it if you&#39;d take care of its pronunciation as it is MY name and you can’t tell me otherwise” and you insert the key into the newly revealed hole. 
 
 Turn. Click. The door opens.
 
-[[Open the door-&gt;The end]]</tw-passagedata><tw-passagedata pid="16" name="Title Screen" tags="" position="75,300" size="100,100">(css: &quot;background: url(TitleScreenNoText.png)&quot;)[
+[[Open the door-&gt;The end]]</tw-passagedata><tw-passagedata pid="16" name="Title Screen" tags="" position="75,300" size="100,100">(bg: &quot;TitleScreenNoText.png&quot;)[
 (color:yellow)[
 # Who are you?
 A mercifully brief interactive fiction game by Aaron, Cait, Jelani, and Michelle
-
-[[Enter-&gt;A strange room]] 
-]
-]
-</tw-passagedata></tw-storydata>
+]]
+[[Enter-&gt;A strange room]] </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
