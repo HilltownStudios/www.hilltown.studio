@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Dolmenwood: What's on the Menu?
+        </title>
+        <script type="module" src="https://www.unpkg.com/vellum-doc@0.10.0/vellum-doc.js">
+        </script>
+        <link rel="stylesheet" href="css/style.css">
+        <script lang="javascript">
+            function dishLists() {
+                return {
+                    poorMain: [
+                        "Battered pizzle",
+                        "Blood porridge",
+                        "Bubble and squeak",
+                        "Dregger's pie",
+                        "Fisher's gruel",
+                        "Roast wellington",
+                        "Special pasty",
+                        "Woad in the hole"
+                    ],
+                    poorSide: [
+                        "Codswallop",
+                        "Pig's ear",
+                        "Sourcroute",
+                        "Wormskin"
+                    ],
+                    commonMain: [
+                        "Mutton roast",
+                        "Onion sandwich",
+                        "Pook's pudding",
+                        "Puggle pie",
+                        "Sausage and mash",
+                        "Shanky",
+                        "Snail skewers",
+                        "Trottel mash"
+                    ],
+                    commonSide: [
+                        "Pickled eggs",
+                        "Coldlanks",
+                        "Hameth sprats",
+                        "Ruddy chad"
+                    ],
+                    fancyMain: [
+                        "Blackbird pie",
+                        "Brathering",
+                        "Jellied lamprey",
+                        "Longmere pike",
+                        "Maids-o'-the-lake",
+                        "Roast lurkey",
+                        "Unicorn rump",
+                        "Whole suckling pig"
+                    ],
+                    fancySide: [
+                        "Larks' tongues in aspic",
+                        "Old Shuck",
+                        "Sparrey",
+                        "Vinegared troll moss"
+                    ],
+                    fancyDessert: [
+                        "Fondant pastries",
+                        "Sugared plums",
+                        "Trifle",
+                        "Walnut tarts"
+                    ],
+                    commonBeverage: [
+                        "Barrowblaster",
+                        "Keye's Balm",
+                        "Marrowhyte Dark",
+                        "Pilston's Heartbreaker",
+                        "Bard's Cordial",
+                        "Old Swythener",
+                        "Prigwort Tipple",
+                        "Mason's"
+                    ],
+                    uncommonBeverage: [
+                        "Cobsworth Pale",
+                        "Cobsworth Pale",
+                        "Halthwidden's",
+                        "Merryweather",
+                        "Tithelands Cider",
+                        "Tithelands Cider",
+                        "Glubwob",
+                        "Mead",
+                        "Mead",
+                        "Distillation of Dusk",
+                        "Ether of Blue",
+                        "Pokey Nog",
+                        "Pokey Nog",
+                        "Porrid's Full Moon",
+                        "The Night Liqueur",
+                        "Wakelyke's Scarlet",
+                        "Earl Yellow Tea",
+                        "Buckston Fizz",
+                        "Faggley's Iced",
+                        "Inkling" 
+                    ],
+                    rareBeverage: [
+                        "Moon's Milk",
+                        "Nippers",
+                        "Nippers",
+                        "Lord Oberon's Ambrosial",
+                        "Prigwort Pure",
+                        "Prigwort Pure",
+                        "Purple Aspintheon",
+                        "Tomfoy's",
+                        "Tomfoy's",
+                        "Lady Mauve",
+                        "The Cold Prince",
+                        "Underbrood's Vintage"
+                    ]
+                }
+            }
+
+            function randomIntFromInterval(min, max) { // min and max included 
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+
+            class FoodMenu extends HTMLElement {
+                /*
+                General kind of food menu. Uses attributes to choose the quality and type.
+                */
+                constructor () {
+                    super()
+                }
+
+                connectedCallback() {
+                    const type = this.getAttribute("type") // main, side, dessert
+                    const dishList = dishLists()[type]
+                    const maxDishes = Number(this.getAttribute("maxDishes")) ? Number(this.getAttribute("maxDishes")) : dishList.length / 2
+                    const minDishes = Number(this.getAttribute("minDishes")) ? Number(this.getAttribute("minDishes")) : maxDishes - 1
+
+
+                    const shadowRoot = this.attachShadow({mode: "open"})
+                    const style = document.createElement("style")
+                    style.textContent = `
+                        li.menu-item {
+                            font-family: "Alegreya", serif;
+                        }
+                            ul.menu {
+                            padding: 2em 0 2em 2em;
+                            list-style: disc;
+                            list-style-type: "\\2767  ";
+                        }
+                    `
+                    const wrapper = document.createElement("section")
+
+                    const numberDishes = randomIntFromInterval(minDishes,maxDishes)
+                    
+                    let dishes = []
+                    const list = document.createElement("ul")
+                    list.classList.add("menu")
+                    while (dishes.length < numberDishes) {
+                        const thisDish = dishList[Math.floor(Math.random()*dishList.length)]
+                        if (!dishes.includes(thisDish)) {
+                            dishes.push(thisDish)
+                            let item = document.createElement("li")
+                            item.classList.add("menu-item")
+                            item.innerText = thisDish
+                            list.appendChild(item)
+                        }
+                    }
+                    wrapper.appendChild(list)
+                    
+                    shadowRoot.appendChild(style)
+                    shadowRoot.appendChild(wrapper)
+                }
+            }
+            customElements.define("food-menu", FoodMenu)
+</script>
+    </head>
+    <body>
+        <vellum-doc>
+            <section id="document">
+                <section>
+                    <figure class="header">
+                        <img src="img/Banquet_du_paon.jpg">
+                    </figure>
+                    <header>
+                        <h1>On the Menu: What's for Dinner in Dolmenwood</h1>
+                        <p>Being a generator of delectable delights for every budget.</p>
+                        <p>See the DPB for descriptions, as well as beverage costs.</p>
+                    </header>
+                </section>
+                <section>
+                    <h3 id="return" part="index-h3"><a href="index.html">Home</a> or: </h3>
+                </section>
+                <section>
+                    <h1 id="poor" part="index-h1">Poor</h1>
+                    <h2>Main Dishes</h2>
+                    <p>Cost: 1sp each</p>
+                    <food-menu type="poorMain"></food-menu>
+                    <h2>Side Dishes</h2>
+                    <p>Cost: 5cp each</p>
+                    <food-menu type="poorSide"></food-menu>
+                    <h2>Beverages</h2>
+                    <p>Cost: Varies</p>
+                    <h3>Common</h3>
+                    <food-menu type="commonBeverage" minDishes="3" maxDishes="4"></food-menu>
+                    <h3>Uncommon</h3>
+                    <food-menu type="uncommonBeverage" minDishes="1" maxDishes="1"></food-menu>
+                </section>
+                <section>
+                    <h1 id="common" part="index-h1">Common</h1>
+                    <h2>Main Dishes</h2>
+                    <p>Cost: 3sp each</p>
+                    <food-menu type="commonMain"></food-menu>
+                    <h2>Side Dishes</h2>
+                    <p>Cost: 2sp each</p>
+                    <food-menu type="commonSide"></food-menu>
+                    <h2>Beverages</h2>
+                    <p>Cost: Varies</p>
+                    <h3>Common</h3>
+                    <p>All common</p>
+                    <h3>Uncommon</h3>
+                    <food-menu type="uncommonBeverage" minDishes="3" maxDishes="4"></food-menu>
+                </section>
+                <section>
+                    <h1 id="fancy" part="index-h1">Fancy</h1>
+                    <h2>Main Dishes</h2>
+                    <p>Cost: 2gp each</p>
+                    <food-menu type="fancyMain" minDishes=""></food-menu>
+                    <h2>Side Dishes</h2>
+                    <p>Cost: 15sp each</p>
+                    <food-menu type="fancySide"></food-menu>
+                    <h2>Desserts</h2>
+                    <p>Cost: 2gp each</p>
+                    <food-menu type="fancyDessert"></food-menu>
+                    <h2>Beverages</h2>
+                    <p>Cost: Varies</p>
+                    <h3>Common</h3>
+                    <p>All common</p>
+                    <h3>Uncommon</h3>
+                    <p>All uncommon</p>
+                    <h3>Rare</h3>
+                    <food-menu type="rareBeverage" minDishes="3" maxDishes="4"></food-menu>
+                </section>
+            </section>
+        </vellum-doc>        
+    </body>
+</html>
+

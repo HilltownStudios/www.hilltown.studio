@@ -102,17 +102,17 @@ h1 .anchor {
 
 h2 {
   font-size: 2em;
-  padding-top: 2em;
+  padding-top: 1em;
 }
 
 h3 {
   font-size: 1.5em;
-  padding-top: 3em;
+  padding-top: 1em;
 }
 
 h4 {
   font-size: 1em;
-  padding-top: 1.2em;
+  padding-top: 1em;
   text-transform: uppercase;
   font-weight: bold;
   border-bottom: solid 1px;
